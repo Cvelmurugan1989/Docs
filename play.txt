@@ -1,0 +1,14 @@
+---
+-hosts: appgroup
+become : yes
+tasks:
+	-name: Test the connection
+	ping:
+        remote_user: appadmin
+
+	-name: INstalling NginX
+	yum name=nginx state=latest update_cache=yes
+
+	-name: Start Nginx
+	service name=nginx state=started
+
