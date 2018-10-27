@@ -14,12 +14,41 @@ tasks:
 
 =========================================================
 
+playbook.yml
+
 ---
 - hosts: all
+  become: yes
   tasks:
-    - name: ensure nginx is at the latest version
-      apt: name=nginx state=latest
-    - name: start nginx
-      service:
-          name: nginx
-          state: started
+   - name: install curl util
+     apt: name=curl
+
+-----------------------------------
+
+control.yml
+
+---
+- hosts: webgrp
+  become: yes
+  tasks:
+   - name: install nginx in control machine
+     apt: name=nginx state=present update_cache=true
+     notify: start nginx server
+  handlers:
+   - name: start nginx server
+     service: name=nginx state=started
+
+
+---------------------------
+stop.yml
+
+
+---
+- hosts: webgroup
+  become: yes
+  tasks:
+   - name: stop nginx
+     service: name=nginx state=stopped
+     service: name=nginx state=absent
+     
+---------------------------------------
