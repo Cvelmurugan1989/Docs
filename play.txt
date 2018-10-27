@@ -52,3 +52,31 @@ stop.yml
      service: name=nginx state=absent
      
 ---------------------------------------
+
+
+with_items Example:
+
+---
+- hosts: appgroup
+  become: yes
+  tasks:
+   - name: install curl and apache2 on node1
+     apt: name={{item}} state=latest
+     with_items:
+      - curl
+      - apache2
+      
+ -------------------------------------
+ 
+ apche2 file change:
+ 
+ ---
+ - hosts: appgroup
+   become: yes
+   tasks:
+    - name: copy new index.html to destination
+      copy: src=/home/appadmin/ansible/files/index.html dest=/var/www/html/ mode=0755
+      notify: restart apache2
+   handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
