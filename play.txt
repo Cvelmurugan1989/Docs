@@ -37,6 +37,12 @@ control.yml
   handlers:
    - name: start nginx server
      service: name=nginx state=started
+     
+  =======================================================
+  
+  
+
+
 
 
 ---------------------------
@@ -80,3 +86,58 @@ with_items Example:
    handlers:
     - name: restart apache2
       service: name=apache2 state=restarted
+
+
+
+=======================================================================================
+========================================================================================
+
+ROLES:
+---------
+  
+  
+  play.yml
+  ---------
+  
+  - hosts: appgroup
+    become: yes
+    roles:
+     - webserver
+   
+   ------------------------
+   
+   goinside roles(webserver) directory
+   
+   tasks/main.yml:
+   
+   ---
+# tasks file for webserver
+- name:  install apache2
+  apt: name=apache2 state=installed
+- name: copy files
+  template: src=index.html.j2 dest=/var/www/html/index.html mode=0755
+  notify: restart apache2
+
+=======================
+
+
+templates/index.html.j2:
+
+appadmin@master:~/ansible/roles/webserver/templates$ more index.html.j2 
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Hi Welcome</h1>
+<p> This is a Role and variable value is {{ place }} </p>
+</body>
+</html>
+------------------------------
+go into vars/main.yml
+
+appadmin@master:~/ansible/roles/webserver/vars$ more main.yml 
+---
+# vars file for webserver
+place: Chennai
+
+======================================
