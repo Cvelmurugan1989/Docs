@@ -140,4 +140,14 @@ appadmin@master:~/ansible/roles/webserver/vars$ more main.yml
 # vars file for webserver
 place: Chennai
 
+--------------------------------------
+handlers/main.yml:
+
+appadmin@master:~/ansible/roles/webserver/handlers$ more main.yml 
+---
+# handlers file for webserver
+- name: restart apache2
+  service: name=apache2 state=restarted
+  
+  
 ======================================
