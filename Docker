@@ -8,3 +8,14 @@ docker swarm join --token SWMTKN-1-256hewlta17rmc0ajtxvgwaiafmswh5qvtinn7a9jyreg
 docker swarm join --token SWMTKN-1-256hewlta17rmc0ajtxvgwaiafmswh5qvtinn7a9jyrega761r-860xl2v84rsu9p2nbtobf7w2k 192.168.56.102:2377
 
 
+Push image:
+------------
+
+docker login
+docker tag my_image $DOCKER_ID_USER/my_image
+docker push $DOCKER_ID_USER/my_image
+
+commit a container change:
+--------------------------
+
+docker commit <container_id>  $DOCKER_USER/image_name:version
