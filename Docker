@@ -5,6 +5,9 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 
 docker swarm join --token SWMTKN-1-0ac1os7tfm1lt2rp6om9s3bf4zgqaklj653fpkvau04ewu2fsh-e9aoj586yglh6w723v9c8tbbw 192.168.56.102:2377
 
+manager
+docker swarm join --token SWMTKN-1-0ac1os7tfm1lt2rp6om9s3bf4zgqaklj653fpkvau04ewu2fsh-5qosc1nz4vwcxr6wfe7r9ysdo 192.168.56.102:2377
+
 Push image:
 ------------
 
